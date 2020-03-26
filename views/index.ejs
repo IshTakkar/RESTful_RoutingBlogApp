@@ -1,0 +1,14 @@
+<%- include("partials/header.ejs")%>
+
+<h1>This is just a heading</h1>
+
+<% blogs.forEach((blog)=>{ %>
+    <div>
+        <h2><%= blog.name %></h2>
+        <img src="<%= blog.image %>" alt="bleh" style="width: 400px;">
+        <p><%= blog.body %></p>
+        <span><%= blog.created %></span>
+    </div>
+<% }) %>
+
+<%- include("partials/footer.ejs")%>
