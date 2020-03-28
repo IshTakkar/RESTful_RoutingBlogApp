@@ -53,6 +53,15 @@ app.post("/blogs", (req, res) => {
     });
 });
 
+app.get("/blogs/:id", (req, res) => {
+    Blog.findById(req.params.id, (err, foundBlog) => {
+        if (err) {
+            console.log("found error");
+        } else {
+            res.render("show", { blog: foundBlog });
+        }
+    });
+});
 
 app.listen(3000, () => {
     console.log("Port opened on 3000");
