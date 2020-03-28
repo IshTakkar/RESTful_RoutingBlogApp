@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
     res.redirect("/blogs");
 });
 
+
 app.get("/blogs", (req, res) => {
     Blog.find({}, (err, blog) => {
         if (err) {
@@ -36,10 +37,21 @@ app.get("/blogs", (req, res) => {
     });
 });
 
+app.get("/blogs/new", (req, res) => {
+    res.render("new");
+});
 
-
-
-
+app.post("/blogs", (req, res) => {
+    Blog.create(req.body.blogs, (err, newBlog) => {
+        if (err) {
+            console.log("Error found");
+        } else {
+            console.log("New Blog added.");
+            console.log(newBlog);
+            res.redirect("/blogs");
+        }
+    });
+});
 
 
 app.listen(3000, () => {
