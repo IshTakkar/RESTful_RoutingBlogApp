@@ -8,3 +8,7 @@ i.icon {
 h1{
     margin-top: 2.0em;
 }
+
+#delete{
+    display: inline;
+}

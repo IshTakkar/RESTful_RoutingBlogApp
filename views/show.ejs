@@ -4,7 +4,7 @@
     <div class="ui huge header"><%= blog.name %></div>
     <div class="ui top attached">
         <div class="item">
-            <img src="<%- blog.image %>" class="ui centered rounded image" style="width: 400px;">
+            <img src="<%= blog.image %>" class="ui centered rounded image" style="width: 400px;">
             <div class="content">
                 <span><%= blog.created.toDateString() %></span>
             </div>
@@ -12,6 +12,10 @@
     </div>
     
     <p><%= blog.body %></p>
+    <a href="/blogs/<%= blog._id %>/edit" class="ui blue inverted button">Edit Blog</a>
+    <form action="/blogs/<%= blog._id %>?_method=DELETE" method="POST" id="delete">
+        <button class="ui red inverted button">Delete Blog</button>
+    </form>
 </div>
 
 
