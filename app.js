@@ -3,13 +3,15 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     methodOverride = require('method-override'),
-    request = require('request');
+    request = require('request'),
+    expressSanitizer = require('express-sanitizer');
 
 
 //APP CONFIGS
 mongoose.connect('mongodb://localhost:27017/restful_blog_app', { useUnifiedTopology: true, useNewUrlParser: true });
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSanitizer());
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
 
@@ -75,7 +77,9 @@ app.get("/blogs/:id/edit", (req, res) => {
     });
 });
 
+
 app.put("/blogs/:id", (req, res) => {
+    req.body.blogs.body = req.sanitize(req.body.blogs.body);
     Blog.findByIdAndUpdate(req.params.id, req.body.blogs, (err, updatedBlog) => {
         if (err) {
             console.log("Error found");
